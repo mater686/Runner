@@ -75,7 +75,7 @@ def RectLogic(scr, mainObject, powerUP, DeltaTime, events):
         mainObject.timer -= mainObject.dashenergy
         if mainObject.timer < 0:
             mainObject.timer = 0
-    playerrec = pygame.draw.rect(scr, (255, 255, 255), (mainObject.x, mainObject.y, mainObject.w, mainObject.h))
+    playerrec = pygame.draw.rect(scr, (mainObject.rcolor, mainObject.gcolor, mainObject.bcolor), (mainObject.x, mainObject.y, mainObject.w, mainObject.h))
     for enemy in enemies:
         enemyrec = pygame.draw.rect(scr, (255, 0, 0), (enemy.x, enemy.y, enemy.w, enemy.h))
         enemycollide = pygame.Rect.colliderect(playerrec, enemyrec)
@@ -123,7 +123,7 @@ def scoresystem(mainObject, DeltaTime):
     global points
     global currentenemies
     timer += gameObject.DeltaTime.dt
-    enemy = gameObject.enemyObject(0, 0, 10, 10, 1, 0, 0, False)
+    enemy = gameObject.enemyObject(0, 0, 10, 10, 1, 0, 0, False, 0, 0, 0)
     
     if timer >= 3:
         points += 1
@@ -220,7 +220,7 @@ def enemySpawn(mainObject, DeltaTime):
     global ENEMYDELTA
     timer2 += gameObject.DeltaTime.dt
     if timer2 > ENEMYDELTA:
-       enemies.append(gameObject.enemyObject(0, 0, 10, 10, 1, 0, 0, False))
+       enemies.append(gameObject.enemyObject(0, 0, 10, 10, 1, 0, 0, False, 255, 255, 255))
        timer2 = 0
     for enemy in enemies:
         enemy.moveTowardsTarget(mainObject)
@@ -240,7 +240,7 @@ def game(screen):
     pb.completedColour = (30, 144, 255)
     pygame.mouse.set_visible(False)
 
-    mainObject = gameObject.gameObject(250,250,15,15,3, 0, 0, False)
+    mainObject = gameObject.gameObject(250,250,15,15,3, 0, 0, False, 255, 255, 255)
     powerUP = gameObject.powerUP()
     DeltaTime = gameObject.DeltaTime()
     
